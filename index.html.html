@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A2 English — Shopping & Asking for Things</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --green-dark: #0F6E56; --green-mid: #1D9E75; --green-light: #E1F5EE; --green-pale: #F2FAF6;
+    --blue-dark: #185FA5; --blue-light: #E6F1FB;
+    --amber-dark: #854F0B; --amber-light: #FAEEDA;
+    --red-light: #FCEBEB; --red-dark: #A32D2D;
+    --text: #1a1a18; --text-sec: #5a5a56; --text-ter: #8a8a85;
+    --border: rgba(30,30,20,0.1); --border-mid: rgba(30,30,20,0.18);
+    --bg: #fafaf8; --bg-card: #ffffff; --bg-soft: #f4f4f0;
+    --radius: 10px; --radius-lg: 14px;
+  }
+  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); font-size: 15px; line-height: 1.7; }
+
+  .page-header { background: var(--bg-card); border-bottom: 1px solid var(--border); padding: 2rem 2.5rem 1.8rem; }
+  .header-inner { max-width: 900px; margin: 0 auto; display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+  .header-eyebrow { font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--green-mid); margin-bottom: 6px; }
+  .header-title { font-family: 'DM Serif Display', serif; font-size: 28px; font-weight: 400; line-height: 1.2; }
+  .header-subtitle { font-size: 14px; color: var(--text-sec); margin-top: 5px; }
+  .header-meta { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
+  .badge { display: inline-flex; align-items: center; font-size: 12px; font-weight: 500; padding: 4px 10px; border-radius: 20px; }
+  .badge-level { background: var(--green-light); color: var(--green-dark); }
+  .badge-name  { background: var(--bg-soft); color: var(--text-sec); }
+
+  .page-body { max-width: 900px; margin: 0 auto; padding: 2.5rem 2rem 4rem; }
+
+  .toc { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1.2rem 1.5rem; margin-bottom: 2.5rem; }
+  .toc-title { font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-ter); margin-bottom: 10px; }
+  .toc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 4px; }
+  .toc-item { font-size: 13px; color: var(--text-sec); padding: 4px 0; display: flex; align-items: center; gap: 6px; }
+  .toc-num { width: 20px; height: 20px; border-radius: 50%; background: var(--green-light); color: var(--green-dark); font-size: 10px; font-weight: 500; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+
+  .lesson-section { margin-bottom: 3.5rem; }
+  .section-eyebrow { font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--green-mid); margin-bottom: 4px; }
+  .section-heading { font-family: 'DM Serif Display', serif; font-size: 22px; font-weight: 400; margin-bottom: 1.1rem; }
+  .section-divider { border: none; border-top: 1px solid var(--border); margin: 3rem 0; }
+
+  .vocab-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(185px, 1fr)); gap: 10px; }
+  .vocab-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
+  .vocab-card-head { background: var(--green-pale); border-bottom: 1px solid var(--border); padding: 8px 14px; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--green-dark); }
+  .vocab-card-body { padding: 6px 14px 10px; }
+  .vocab-row { display: flex; justify-content: space-between; align-items: baseline; padding: 5px 0; border-bottom: 1px solid var(--border); font-size: 14px; }
+  .vocab-row:last-child { border-bottom: none; }
+  .v-en { font-weight: 500; }
+  .v-tr { color: var(--text-sec); font-size: 13px; }
+
+  .grammar-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; margin-bottom: 16px; }
+  .grammar-card-head { padding: 12px 16px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .grammar-card-head strong { font-size: 15px; font-weight: 500; }
+  .g-tag { font-size: 11px; font-weight: 500; padding: 3px 9px; border-radius: 20px; background: var(--green-light); color: var(--green-dark); }
+  .grammar-cols { display: grid; grid-template-columns: 1fr 1fr; }
+  .g-col { padding: 14px 16px; font-size: 14px; line-height: 1.7; }
+  .g-col:first-child { border-right: 1px solid var(--border); }
+  .g-col-label { font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-ter); margin-bottom: 8px; }
+  .g-col p { margin-bottom: 6px; }
+  .g-col p:last-child { margin-bottom: 0; }
+  .g-rule { background: var(--bg-soft); border-radius: var(--radius); padding: 10px 14px; font-size: 13px; line-height: 1.65; margin-top: 8px; }
+  .g-rule strong { color: var(--green-dark); }
+  .grammar-examples { padding: 10px 16px 14px; border-top: 1px solid var(--border); background: var(--bg-soft); display: flex; flex-wrap: wrap; gap: 7px; }
+  .ex-pill { font-size: 13px; background: var(--bg-card); border: 1px solid var(--border-mid); border-radius: 20px; padding: 4px 12px; color: var(--text-sec); }
+  .ex-pill em { color: var(--green-dark); font-style: normal; font-weight: 500; }
+  .grammar-table-wrap { padding: 0; overflow-x: auto; }
+  .grammar-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  .grammar-table th { background: var(--green-pale); color: var(--green-dark); font-weight: 500; padding: 8px 12px; text-align: left; border-bottom: 1px solid var(--border); }
+  .grammar-table td { padding: 8px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .grammar-table tr:last-child td { border-bottom: none; }
+  .grammar-table td:first-child { font-weight: 500; white-space: nowrap; }
+
+  .phrases-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 10px; }
+  .phrase-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1rem 1.1rem; }
+  .phrase-en { font-weight: 500; font-size: 15px; margin-bottom: 3px; }
+  .phrase-tr { font-size: 13px; color: var(--text-sec); }
+  .phrase-note { font-size: 12px; color: var(--green-dark); margin-top: 5px; background: var(--green-pale); border-radius: 6px; padding: 3px 8px; display: inline-block; }
+
+  .dialogue-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; margin-bottom: 14px; }
+  .dialogue-header { background: var(--bg-soft); border-bottom: 1px solid var(--border); padding: 10px 18px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 6px; }
+  .dialogue-header span { font-size: 12px; font-weight: 500; color: var(--text-sec); letter-spacing: 0.08em; text-transform: uppercase; }
+  .dialogue-body { padding: 1.1rem 1.4rem; }
+  .d-line { display: flex; gap: 10px; margin-bottom: 14px; align-items: flex-start; }
+  .d-line:last-child { margin-bottom: 0; }
+  .d-tag { font-size: 11px; font-weight: 500; padding: 3px 9px; border-radius: 20px; white-space: nowrap; flex-shrink: 0; margin-top: 2px; }
+  .d-customer { background: var(--green-light); color: var(--green-dark); }
+  .d-assistant { background: var(--blue-light); color: var(--blue-dark); }
+  .d-text { font-size: 14px; line-height: 1.6; }
+  .d-tr { font-size: 12px; color: var(--text-ter); margin-top: 2px; }
+
+  .reading-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
+  .reading-text-wrap { padding: 1.5rem 1.8rem; border-bottom: 1px solid var(--border); }
+  .reading-label { font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.09em; color: var(--green-mid); margin-bottom: 10px; }
+  .reading-text { font-size: 15px; line-height: 1.9; margin-bottom: 1.2rem; }
+  .reading-text:last-of-type { margin-bottom: 0; }
+  .reading-tr-wrap { background: var(--bg-soft); padding: 1.2rem 1.8rem; border-bottom: 1px solid var(--border); }
+  .reading-tr { font-size: 13px; color: var(--text-sec); line-height: 1.75; }
+  .reading-qs { padding: 1.1rem 1.5rem; }
+  .qs-label { font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.09em; color: var(--text-ter); margin-bottom: 10px; }
+  .q-row { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; padding: 8px 0; border-bottom: 1px solid var(--border); }
+  .q-row:last-child { border-bottom: none; }
+  .q-num { width: 22px; height: 22px; border-radius: 50%; background: var(--green-light); color: var(--green-dark); font-size: 11px; font-weight: 500; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+
+  .exercise-list { display: flex; flex-direction: column; gap: 10px; }
+  .ex-item { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 12px 16px; display: flex; align-items: center; gap: 14px; font-size: 14px; flex-wrap: wrap; }
+  .ex-num { width: 26px; height: 26px; border-radius: 50%; background: var(--bg-soft); color: var(--text-sec); font-size: 12px; font-weight: 500; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .ex-blank { display: inline-block; min-width: 50px; border-bottom: 2px solid var(--green-mid); margin: 0 4px; }
+  .ex-hint { margin-left: auto; font-size: 12px; color: var(--text-ter); background: var(--bg-soft); padding: 3px 10px; border-radius: 20px; white-space: nowrap; }
+
+  .wo-list { display: flex; flex-direction: column; gap: 12px; }
+  .wo-item { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 14px 16px; }
+  .wo-num-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+  .wo-num { width: 24px; height: 24px; border-radius: 50%; background: var(--amber-light); color: var(--amber-dark); font-size: 11px; font-weight: 500; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .wo-instruction { font-size: 12px; color: var(--text-ter); }
+  .wo-words { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 8px; }
+  .wo-word { font-size: 13px; font-weight: 500; background: var(--blue-light); color: var(--blue-dark); border-radius: 20px; padding: 4px 12px; cursor: pointer; border: 1px solid rgba(24,95,165,0.2); user-select: none; transition: opacity 0.15s; }
+  .wo-word.used { opacity: 0.3; pointer-events: none; }
+  .wo-answer { min-height: 38px; border: 2px dashed var(--border-mid); border-radius: var(--radius); padding: 6px 10px; font-size: 14px; color: var(--text-ter); display: flex; align-items: center; flex-wrap: wrap; gap: 6px; }
+  .wo-answer.has-content { border-color: var(--green-mid); color: var(--text); }
+  .wo-placed { font-size: 13px; font-weight: 500; background: var(--green-light); color: var(--green-dark); border-radius: 20px; padding: 4px 12px; cursor: pointer; border: 1px solid rgba(15,110,86,0.2); }
+  .wo-check { margin-top: 8px; display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+  .wo-btn { font-size: 12px; font-family: 'DM Sans', sans-serif; border: 1px solid var(--border-mid); border-radius: 20px; padding: 5px 14px; cursor: pointer; background: var(--bg-soft); color: var(--text-sec); transition: background 0.15s; }
+  .wo-btn:hover { background: var(--green-light); color: var(--green-dark); border-color: var(--green-mid); }
+  .wo-feedback { font-size: 12px; font-weight: 500; padding: 4px 12px; border-radius: 20px; display: none; }
+  .wo-feedback.correct { display: inline-block; background: var(--green-light); color: var(--green-dark); }
+  .wo-feedback.wrong { display: inline-block; background: var(--red-light); color: var(--red-dark); }
+
+  .quiz-list { display: flex; flex-direction: column; gap: 12px; }
+  .quiz-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 14px 16px; }
+  .quiz-q-row { display: flex; gap: 10px; align-items: flex-start; margin-bottom: 10px; }
+  .quiz-num { width: 24px; height: 24px; border-radius: 50%; background: var(--bg-soft); color: var(--text-sec); font-size: 11px; font-weight: 500; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
+  .quiz-q { font-size: 14px; line-height: 1.6; }
+  .quiz-choices { display: flex; flex-wrap: wrap; gap: 7px; padding-left: 34px; }
+  .choice-btn { font-size: 13px; border: 1px solid var(--border-mid); border-radius: 20px; padding: 5px 16px; cursor: pointer; background: var(--bg-soft); color: var(--text-sec); font-family: 'DM Sans', sans-serif; transition: background 0.15s; }
+  .choice-btn:hover:not(:disabled) { background: var(--green-light); color: var(--green-dark); border-color: var(--green-mid); }
+  .choice-btn.correct { background: var(--green-light); color: var(--green-dark); border-color: var(--green-mid); font-weight: 500; }
+  .choice-btn.wrong { background: var(--red-light); color: var(--red-dark); border-color: #E24B4A; }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .mini-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
+  .mini-head { background: var(--bg-soft); border-bottom: 1px solid var(--border); padding: 8px 14px; font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-sec); }
+  .mini-body { padding: 10px 14px; }
+  .mini-row { font-size: 14px; padding: 6px 0; border-bottom: 1px solid var(--border); line-height: 1.55; color: var(--text-sec); }
+  .mini-row:last-child { border-bottom: none; }
+  .mini-row strong { color: var(--text); font-weight: 500; }
+  .arrow { color: var(--green-mid); margin: 0 5px; }
+
+  .challenge-card { background: var(--green-pale); border: 1px solid rgba(29,158,117,0.25); border-radius: var(--radius-lg); padding: 1.4rem 1.6rem; display: flex; align-items: flex-start; gap: 1.1rem; }
+  .challenge-icon { width: 40px; height: 40px; border-radius: 50%; background: var(--green-mid); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .challenge-icon svg { width: 20px; height: 20px; fill: white; }
+  .challenge-title { font-weight: 500; font-size: 15px; margin-bottom: 4px; color: var(--green-dark); }
+  .challenge-text { font-size: 14px; color: var(--text-sec); line-height: 1.65; }
+
+  .score-box { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1.2rem 1.5rem; display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+  .score-val { font-family: 'DM Serif Display', serif; font-size: 28px; color: var(--green-dark); }
+
+  .page-footer { text-align: center; font-size: 12px; color: var(--text-ter); margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--border); }
+
+  @media (max-width: 580px) {
+    .page-header { padding: 1.5rem 1.2rem; }
+    .page-body { padding: 1.5rem 1rem 3rem; }
+    .grammar-cols { grid-template-columns: 1fr; }
+    .grammar-cols .g-col:first-child { border-right: none; border-bottom: 1px solid var(--border); }
+    .two-col { grid-template-columns: 1fr; }
+    .header-meta { align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<header class="page-header">
+  <div class="header-inner">
+    <div>
+      <div class="header-eyebrow">English Language Programme</div>
+      <h1 class="header-title">Shopping &amp; Asking for Things</h1>
+      <p class="header-subtitle">A2 Level &nbsp;·&nbsp; 12 Sections &nbsp;·&nbsp; Grammar, Reading, Dialogues &amp; Interactive Exercises</p>
+    </div>
+    <div class="header-meta">
+      <span class="badge badge-level">A2 — Elementary</span>
+      <span class="badge badge-name">Mehmet Kaan Yılmaz · TANAP</span>
+    </div>
+  </div>
+</header>
+
+<div class="page-body">
+
+  <div class="toc">
+    <div class="toc-title">Contents</div>
+    <div class="toc-grid">
+      <div class="toc-item"><span class="toc-num">1</span>Vocabulary</div>
+      <div class="toc-item"><span class="toc-num">2</span>Articles: a / an / the</div>
+      <div class="toc-item"><span class="toc-num">3</span>Quantifiers</div>
+      <div class="toc-item"><span class="toc-num">4</span>Do / Does Questions</div>
+      <div class="toc-item"><span class="toc-num">5</span>Asking for Things</div>
+      <div class="toc-item"><span class="toc-num">6</span>Dialogues (×4)</div>
+      <div class="toc-item"><span class="toc-num">7</span>Reading + 12 Questions</div>
+      <div class="toc-item"><span class="toc-num">8</span>Fill-in Exercises (×15)</div>
+      <div class="toc-item"><span class="toc-num">9</span>Speaking Drills</div>
+      <div class="toc-item"><span class="toc-num">10</span>Word Order (×20)</div>
+      <div class="toc-item"><span class="toc-num">11</span>Quiz (×20)</div>
+      <div class="toc-item"><span class="toc-num">12</span>Speaking Challenge</div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════ 1. VOCABULARY ═══════════════════════ -->
+  <section class="lesson-section">
+    <div class="section-eyebrow">Section 1</div>
+    <h2 class="section-heading">Vocabulary · Kelime Listesi</h2>
+    <div class="vocab-grid">
+      <div class="vocab-card">
+        <div class="vocab-card-head">Clothing · Giyim</div>
+        <div class="vocab-card-body">
+          <div class="vocab-row"><span class="v-en">shirt</span><span class="v-tr">gömlek</span></div>
+          <div class="vocab-row"><span class="v-en">pants</span><span class="v-tr">pantolon</span></div>
+          <div class="vocab-row"><span class="v-en">dress</span><span class="v-tr">elbise</span></div>
+          <div class="vocab-row"><span class="v-en">jacket</span><span class="v-tr">ceket</span></div>
+          <div class="vocab-row"><span class="v-en">shoes</span><span class="v-tr">ayakkabı</span></div>
+          <div class="vocab-row"><span class="v-en">size</span><span class="v-tr">beden</span></div>
+          <div class="vocab-row"><span class="v-en">try on</span><span class="v-tr">denemek</span></div>
+          <div class="vocab-row"><span class="v-en">fitting room</span><span class="v-tr">soyunma kabini</span></div>
+          <div class="vocab-row"><span class="v-en">price tag</span><span class="v-tr">fiyat etiketi</span></div>
+        </div>
+      </div>
+      <div class="vocab-card">
+        <div class="vocab-card-head">Electronics · Elektronik</div>
+        <div class="vocab-card-body">
+          <div class="vocab-row"><span class="v-en">phone</span><span class="v-tr">telefon</span></div>
+          <div class="vocab-row"><span class="v-en">laptop</span><span class="v-tr">dizüstü bilgisayar</span></div>
+          <div class="vocab-row"><span class="v-en">charger</span><span class="v-tr">şarj aleti</span></div>
+          <div class="vocab-row"><span class="v-en">screen</span><span class="v-tr">ekran</span></div>
+          <div class="vocab-row"><span class="v-en">battery</span><span class="v-tr">pil / batarya</span></div>
+          <div class="vocab-row"><span class="v-en">headphones</span><span class="v-tr">kulaklık</span></div>
+          <div class="vocab-row"><span class="v-en">cable</span><span class="v-tr">kablo</span></div>
+          <div class="vocab-row"><span class="v-en">tablet</span><span class="v-tr">tablet</span></div>
+        </div>
+      </div>
+      <div class="vocab-card">
+        <div class="vocab-card-head">Furniture · Mobilya</div>
+        <div class="vocab-card-body">
+          <div class="vocab-row"><span class="v-en">table</span><span class="v-tr">masa</span></div>
+          <div class="vocab-row"><span class="v-en">chair</span><span class="v-tr">sandalye</span></div>
+          <div class="vocab-row"><span class="v-en">sofa</span><span class="v-tr">kanepe</span></div>
+          <div class="vocab-row"><span class="v-en">bed</span><span class="v-tr">yatak</span></div>
+          <div class="vocab-row"><span class="v-en">shelf</span><span class="v-tr">raf</span></div>
+          <div class="vocab-row"><span class="v-en">wardrobe</span><span class="v-tr">dolap</span></div>
+          <div class="vocab-row"><span class="v-en">desk</span><span class="v-tr">çalışma masası</span></div>
+        </div>
+      </div>
+      <div class="vocab-card">
+        <div class="vocab-card-head">Bookstore · Kitapçı</div>
+        <div class="vocab-card-body">
+          <div class="vocab-row"><span class="v-en">book</span><span class="v-tr">kitap</span></div>
+          <div class="vocab-row"><span class="v-en">novel</span><span class="v-tr">roman</span></div>
+          <div class="vocab-row"><span class="v-en">author</span><span class="v-tr">yazar</span></div>
+          <div class="vocab-row"><span class="v-en">page</span><span class="v-tr">sayfa</span></div>
+          <div class="vocab-row"><span class="v-en">dictionary</span><span class="v-tr">sözlük</span></div>
+          <div class="vocab-row"><span class="v-en">magazine</span><span class="v-tr">dergi</span></div>
+        </div>
+      </div>
+      <div class="vocab-card">
+        <div class="vocab-card-head">Shopping · Alışveriş</div>
+        <div class="vocab-card-body">
+          <div class="vocab-row"><span class="v-en">customer</span><span class="v-tr">müşteri</span></div>
+          <div class="vocab-row"><span class="v-en">shop assistant</span><span class="v-tr">mağaza görevlisi</span></div>
+          <div class="vocab-row"><span class="v-en">receipt</span><span class="v-tr">fiş / makbuz</span></div>
+          <div class="vocab-row"><span class="v-en">discount</span><span class="v-tr">indirim</span></div>
+          <div class="vocab-row"><span class="v-en">cash</span><span class="v-tr">nakit</span></div>
+          <div class="vocab-row"><span class="v-en">credit card</span><span class="v-tr">kredi kartı</span></div>
+          <div class="vocab-row"><span class="v-en">pay</span><span class="v-tr">ödemek</span></div>
+          <div class="vocab-row"><span class="v-en">return / exchange</span><span class="v-tr">iade / değiştirmek</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- ═══════════════════════ 2. ARTICLES ═══════════════════════ -->
+  <section class="lesson-section">
+    <div class="section-eyebrow">Section 2 — Grammar</div>
+    <h2 class="section-heading">Articles: a / an / the</h2>
+
+    <div class="grammar-card">
+      <div class="grammar-card-head"><strong>When to use A and AN</strong><span class="g-tag">Indefinite Article</span></div>
+      <div class="grammar-cols">
+        <div class="g-col">
+          <div class="g-col-label">Rules in English</div>
+          <p>Use <strong>a</strong> before consonant sounds: <em>a shirt, a laptop, a book.</em></p>
+          <p>Use <strong>an</strong> before vowel sounds (a, e, i, o, u): <em>an umbrella, an orange, an app.</em></p>
+          <p>Use <strong>a / an</strong> when you mention something for the <strong>first time</strong>, or when it is <strong>not specific</strong> — you do not know which exact one, or it doesn't matter which one.</p>
+          <div class="g-rule"><strong>Formula:</strong> Subject + verb + <strong>a / an</strong> + noun<br>→ I need <strong>a</strong> charger. (any charger will do)</div>
+        </div>
+        <div class="g-col">
+          <div class="g-col-label">Türkçe Açıklama</div>
+          <p><strong>a</strong> ünsüz sesle başlayan kelimeler önünde kullanılır: <em>a shirt</em> (bir gömlek).</p>
+          <p><strong>an</strong> sesli harfle (a, e, i, o, u) başlayan kelimeler önünde kullanılır: <em>an umbrella.</em></p>
+          <p>Türkçede "a / an" yerine <strong>"bir"</strong> kullanılır ya da hiç kullanılmaz. İlk kez bahsedilen veya belirsiz bir şey için kullanılır.</p>
+          <div class="g-rule"><strong>Kural:</strong> Belirsiz, herhangi biri = <strong>a / an</strong><br>→ I want <strong>a</strong> jacket. (herhangi bir ceket)</div>
+        </div>
+      </div>
+      <div class="grammar-examples">
+        <span class="ex-pill">I want <em>a</em> shirt.</span>
+        <span class="ex-pill">She needs <em>an</em> umbrella.</span>
+        <span class="ex-pill">He has <em>a</em> laptop.</span>
+        <span class="ex-pill">I need <em>an</em> adapter.</span>
+      </div>
+    </div>
+
+    <div class="grammar-card">
+      <div class="grammar-card-head"><strong>When to use THE</strong><span class="g-tag">Definite Article</span></div>
+      <div class="grammar-cols">
+        <div class="g-col">
+          <div class="g-col-label">Rules in English</div>
+          <p>Use <strong>the</strong> when the listener <strong>already knows which one</strong> you mean.</p>
+          <p>Use <strong>the</strong> when something has been <strong>mentioned before</strong>.</p>
+          <p>Use <strong>the</strong> with <strong>unique things</strong>: the sun, the Pacific Ocean, the internet.</p>
+          <p>Use <strong>the</strong> with <strong>superlatives</strong>: the best, the largest.</p>
+          <div class="g-rule"><strong>Pattern (first → second mention):</strong><br>I bought <em>a</em> laptop. <em>The</em> laptop is fast.</div>
+        </div>
+        <div class="g-col">
+          <div class="g-col-label">Türkçe Açıklama</div>
+          <p><strong>the</strong> belirli bir şey için kullanılır; Türkçede doğrudan karşılığı yoktur.</p>
+          <p>Daha önce bahsedilen bir şey tekrar söylendiğinde <strong>the</strong> kullanılır.</p>
+          <p>Dünyada tek olan şeyler için kullanılır: the sun (güneş), the Pacific Ocean.</p>
+          <div class="g-rule"><strong>Kural:</strong><br>İlk söyleyişte = <em>a</em>. Sonraki söyleyişte = <em>the</em>.<br>→ I have <em>a</em> book. <em>The</em> book is interesting.</div>
+        </div>
+      </div>
+      <div class="grammar-examples">
+        <span class="ex-pill"><em>The</em> shirt is blue.</span>
+        <span class="ex-pill">We ship across <em>the</em> Pacific Ocean.</span>
+        <span class="ex-pill"><em>The</em> fitting room is on the left.</span>
+        <span class="ex-pill">This is <em>the</em> best laptop.</span>
+      </div>
+    </div>
+
+    <div class="grammar-card">
+      <div class="grammar-card-head"><strong>When NOT to use an article (Ø zero article)</strong><span class="g-tag">Zero Article</span></div>
+      <div class="grammar-cols">
+        <div class="g-col">
+          <div class="g-col-label">Rules in English</div>
+          <p>No article before <strong>plural nouns</strong> used in general: <em>Books are expensive.</em></p>
+          <p>No article before <strong>uncountable nouns</strong> in general: <em>Furniture costs money.</em></p>
+          <p>No article before <strong>proper names</strong> of most countries and cities: <em>Turkey, Ankara, London.</em></p>
+        </div>
+        <div class="g-col">
+          <div class="g-col-label">Türkçe Açıklama</div>
+          <p>Genel anlamda çoğul isimler önünde article kullanılmaz: <em>Books are expensive.</em></p>
+          <p>Sayılamayan isimler genel anlamda kullanıldığında article gerekmez: <em>Furniture costs money.</em></p>
+          <p>Çoğu ülke ve şehir ismi önünde article kullanılmaz: <em>Turkey, Ankara.</em></p>
+        </div>
+      </div>
+      <div class="grammar-examples">
+        <span class="ex-pill"><em>Ø</em> Books are expensive.</span>
+        <span class="ex-pill"><em>Ø</em> Furniture costs a lot.</span>
+        <span class="ex-pill">She lives in <em>Ø</em> Turkey.</span>
+      </div>
+    </div>
+
+    <div class="grammar-card">
+      <div class="grammar-card-head"><strong>Quick reference table</strong><span class="g-tag">Summary</span></div>
+      <div class="grammar-table-wrap">
+        <table class="grammar-table">
+          <tr><th>Article</th><th>Use it when…</th><th>Example</th></tr>
+          <tr><td>a</td><td>singular, first mention, not specific, before consonant sound</td><td>I want a jacket.</td></tr>
+          <tr><td>an</td><td>singular, not specific, before vowel sound</td><td>I need an adapter.</td></tr>
+          <tr><td>the</td><td>specific, previously mentioned, unique thing</td><td>The jacket is too small.</td></tr>
+          <tr><td>Ø (none)</td><td>general plural or uncountable noun</td><td>Books are on the shelf.</td></tr>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- ═══════════════════════ 3. QUANTIFIERS ═══════════════════════ -->
+  <section class="lesson-section">
+    <div class="section-eyebrow">Section 3 — Grammar</div>
+    <h2 class="section-heading">Quantifiers: some / any / a lot of / lots of</h2>
+
+    <div class="grammar-card">
+      <div class="grammar-card-head"><strong>SOME — positive sentences &amp; offers</strong><span class="g-tag">Positive</span></div>
+      <div class="grammar-cols">
+        <div class="g-col">
+          <div class="g-col-label">Rules in English</div>
+          <p>Use <strong>some</strong> in <strong>affirmative (positive) sentences</strong> with countable plural nouns and uncountable nouns.</p>
+          <p>It means "a certain number" — you don't give the exact amount.</p>
+          <p>Also use <strong>some</strong> in questions when you <strong>expect a "yes" answer</strong> or when making an offer or request.</p>
+          <div class="g-rule"><strong>Formula:</strong> Subject + verb + <strong>some</strong> + noun<br>→ I have <strong>some</strong> books. &nbsp;|&nbsp; Can I have <strong>some</strong> water?</div>
+        </div>
+        <div class="g-col">
+          <div class="g-col-label">Türkçe Açıklama</div>
+          <p><strong>some</strong> olumlu cümlelerde kullanılır. Türkçede "bazı", "biraz" ya da hiç çevrilmez.</p>
+          <p>Sayılabilen çoğul ve sayılamayan isimlerle kullanılır.</p>
+          <p>Teklif veya nazik ricada da kullanılabilir: <em>Would you like some help?</em></p>
+          <div class="g-rule"><strong>Kural:</strong> Olumlu cümle = <strong>some</strong><br>→ I have <strong>some</strong> chairs. (Birkaç sandalyem var.)</div>
+        </div>
+      </div>
+      <div class="grammar-examples">
+        <span class="ex-pill">I have <em>some</em> books.</span>
+        <span class="ex-pill">We have <em>some</em> furniture.</span>
+        <span class="ex-pill">Would you like <em>some</em> help?</span>
+        <span class="ex-pill">She bought <em>some</em> clothes.</span>
+      </div>
+    </div>
+
+    <div class="grammar-card">
+      <div class="grammar-card-head"><strong>ANY — negatives &amp; genuine questions</strong><span class="g-tag">Negative / Question</span></div>
+      <div class="grammar-cols">
+        <div class="g-col">
+          <div class="g-col-label">Rules in English</div>
+          <p>Use <strong>any</strong> in <strong>negative sentences</strong> and <strong>genuine questions</strong> where you don't know the answer.</p>
+          <p>Negative: "I don't have any chairs" = the quantity is zero.</p>
+          <p>Question: "Do you have any chairs?" = you are genuinely asking.</p>
+          <div class="g-rule"><strong>Negative:</strong> Subject + don't/doesn't have + <strong>any</strong> + noun<br><strong>Question:</strong> Do/Does + subject + have + <strong>any</strong> + noun?</div>
+        </div>
+        <div class="g-col">
+          <div class="g-col-label">Türkçe Açıklama</div>
+          <p><strong>any</strong> olumsuz cümlelerde ve gerçek sorularda kullanılır. Türkçede "hiç" ya da çevrilmez.</p>
+          <p>Olumsuzda: <em>I don't have any phones.</em> (Hiç telefonum yok.)</p>
+          <p>Soruda: <em>Do you have any jackets?</em> (Ceketiniz var mı?)</p>
+          <div class="g-rule"><strong>Kural:</strong> Olumsuz &amp; soru = <strong>any</strong><br>→ We don't have <strong>any</strong> beds. / Do you have <strong>any</strong> beds?</div>
+        </div>
+      </div>
+      <div class="grammar-examples">
+        <span class="ex-pill">Do you have <em>any</em> chairs?</span>
+        <span class="ex-pill">I don't have <em>any</em> money.</span>
+        <span class="ex-pill">Do you sell <em>any</em> laptops?</span>
+        <span class="ex-pill">We don't have <em>any</em> sofas left.</span>
+      </div>
+    </div>
+
+    <div class="grammar-card">
+      <div class="grammar-card-head"><strong>A LOT OF / LOTS OF — large quantity</strong><span class="g-tag">Large Quantity</span></div>
+      <div class="grammar-cols">
+        <div class="g-col">
+          <div class="g-col-label">Rules in English</div>
+          <p><strong>A lot of</strong> and <strong>lots of</strong> mean the same thing: a large quantity.</p>
+          <p>Both work with countable and uncountable nouns.</p>
+          <p>Used mainly in <strong>positive sentences</strong>, but can appear in questions too. <em>Lots of</em> is slightly more informal.</p>
+          <div class="g-rule"><strong>Formula:</strong> Subject + verb + <strong>a lot of / lots of</strong> + noun<br>→ We sell <strong>a lot of</strong> products.</div>
+        </div>
+        <div class="g-col">
+          <div class="g-col-label">Türkçe Açıklama</div>
+          <p><strong>a lot of</strong> ve <strong>lots of</strong> ikisi de "çok" anlamına gelir ve birbirinin yerine kullanılabilir.</p>
+          <p>Hem sayılabilen hem sayılamayan isimlerle kullanılır.</p>
+          <p>Genellikle olumlu cümlelerde kullanılır; <em>lots of</em> daha gayri resmidir.</p>
+          <div class="g-rule"><strong>Kural:</strong> Büyük miktar = <strong>a lot of / lots of</strong><br>→ She has <strong>lots of</strong> clothes. (Çok kıyafeti var.)</div>
+        </div>
+      </div>
+      <div class="grammar-examples">
+        <span class="ex-pill">We sell <em>a lot of</em> products.</span>
+        <span class="ex-pill">She has <em>lots of</em> clothes.</span>
+        <span class="ex-pill">There are <em>a lot of</em> customers today.</span>
+      </div>
+    </div>
+
+    <div class="grammar-card">
+      <div class="grammar-card-head"><strong>Quick reference table</strong><span class="g-tag">Summary</span></div>
+      <div class="grammar-table-wrap">
+        <table class="grammar-table">
+          <tr><th>Quantifier</th><th>Sentence type</th><th>Example</th></tr>
+          <tr><td>some</td><td>positive (+), offers, expected "yes" Q</td><td>I have some books.</td></tr>
+          <tr><td>any</td><td>negative (–), genuine questions (?)</td><td>I don't have any books. / Do you have any?</td></tr>
+          <tr><td>a lot of</td><td>positive (+), questions (?)</td><td>We have a lot of furniture.</td></tr>
+          <tr><td>lots of</td><td>positive (+), informal</td><td>She has lots of clothes.</td></tr>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- ═══════════════════════ 4. DO / DOES ═══════════════════════ -->
+  <section class="lesson-section">
+    <div class="section-eyebrow">Section 4 — Grammar</div>
+    <h2 class="section-heading">Do / Does Questions &amp; Negatives</h2>
+
+    <div class="grammar-card">
+      <div class="grammar-card-head"><strong>Forming Yes / No Questions</strong><span class="g-tag">Present Simple Questions</span></div>
+      <div class="grammar-cols">
+        <div class="g-col">
+          <div class="g-col-label">Rules in English</div>
+          <p>In present simple, use <strong>do</strong> or <strong>does</strong> to form questions.</p>
+          <p>Use <strong>do</strong> with: I, you, we, they</p>
+          <p>Use <strong>does</strong> with: he, she, it</p>
+          <p><strong>Important:</strong> The main verb stays in its <strong>base form</strong> (no -s) when you use <em>does</em>.</p>
+          <div class="g-rule"><strong>Question formula:</strong><br><strong>Do / Does</strong> + subject + base verb + object?<br>→ <em>Does</em> she sell phones? (NOT: Does she <u>sells</u>)</div>
+        </div>
+        <div class="g-col">
+          <div class="g-col-label">Türkçe Açıklama</div>
+          <p>İngilizce geniş zamanda soru kurmak için cümlenin başına <strong>do</strong> veya <strong>does</strong> getirilir.</p>
+          <p><strong>do</strong> → I, you, we, they ile kullanılır</p>
+          <p><strong>does</strong> → he, she, it ile kullanılır</p>
+          <p><strong>Önemli:</strong> <em>does</em> kullanıldığında ana fiil -s almaz, sade kalır.</p>
+          <div class="g-rule"><strong>Soru kalıbı:</strong><br><strong>Do / Does</strong> + özne + yalın fiil?<br>→ <em>Does</em> he work here? (NOT: Does he <u>works</u>)</div>
+        </div>
+      </div>
+      <div class="grammar-examples">
+        <span class="ex-pill"><em>Do</em> you sell phones?</span>
+        <span class="ex-pill"><em>Does</em> she work here?</span>
+        <span class="ex-pill"><em>Do</em> they have any laptops?</span>
+        <span class="ex-pill"><em>Does</em> he sell furniture?</span>
+        <span class="ex-pill"><em>Do</em> we have any chargers?</span>
+      </div>
+    </div>
+
+    <div class="grammar-card">
+      <div class="grammar-card-head"><strong>Negative sentences: Don't / Doesn't</strong><span class="g-tag">Present Simple Negatives</span></div>
+      <div class="grammar-cols">
+        <div class="g-col">
+          <div class="g-col-label">Rules in English</div>
+          <p>To make a <strong>negative</strong>, add <strong>don't</strong> (= do not) or <strong>doesn't</strong> (= does not) before the main verb.</p>
+          <p>Use <strong>don't</strong> with: I, you, we, they</p>
+          <p>Use <strong>doesn't</strong> with: he, she, it</p>
+          <div class="g-rule"><strong>Negative formula:</strong><br>Subject + <strong>don't / doesn't</strong> + base verb + object<br>→ She <em>doesn't</em> sell clothes. / I <em>don't</em> have any beds.</div>
+        </div>
+        <div class="g-col">
+          <div class="g-col-label">Türkçe Açıklama</div>
+          <p>Olumsuz cümle için <strong>don't</strong> veya <strong>doesn't</strong> kullanılır.</p>
+          <p><strong>don't</strong> → I, you, we, they</p>
+          <p><strong>doesn't</strong> → he, she, it</p>
+          <div class="g-rule"><strong>Olumsuz kalıp:</strong><br>Özne + <strong>don't / doesn't</strong> + yalın fiil<br>→ He <em>doesn't</em> have a laptop. / I <em>don't</em> sell books.</div>
+        </div>
+      </div>
+      <div class="grammar-examples">
+        <span class="ex-pill">I <em>don't</em> have any chairs.</span>
+        <span class="ex-pill">She <em>doesn't</em> work here.</span>
+        <span class="ex-pill">They <em>don't</em> sell furniture.</span>
+        <span class="ex-pill">He <em>doesn't</em> have a phone.</span>
+      </div>
+    </div>
+
+    <div class="grammar-card">
+      <div class="grammar-card-head"><strong>Subject-verb agreement reference table</strong><span class="g-tag">Reference</span></div>
+      <div class="grammar-table-wrap">
+        <table class="grammar-table">
+          <tr><th>Subject</th><th>Positive (+)</th><th>Negative (–)</th><th>Question (?)</th></tr>
+          <tr><td>I</td><td>I sell books.</td><td>I don't sell books.</td><td>Do I sell books?</td></tr>
+          <tr><td>You</td><td>You sell books.</td><td>You don't sell books.</td><td>Do you sell books?</td></tr>
+          <tr><td>He / She / It</td><td>He sells books.</td><td>He doesn't sell books.</td><td>Does he sell books?</td></tr>
+          <tr><td>We / They</td><td>They sell books.</td><td>They don't sell books.</td><td>Do they sell books?</td></tr>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- ═══════════════════════ 5. ASKING FOR THINGS ═══════════════════════ -->
+  <section class="lesson-section">
+    <div class="section-eyebrow">Section 5</div>
+    <h2 class="section-heading">Asking for Things · Bir Şey İstemek</h2>
+    <div class="phrases-grid">
+      <div class="phrase-card"><div class="phrase-en">Can I have a laptop?</div><div class="phrase-tr">Bir laptop alabilir miyim?</div><div class="phrase-note">Polite request · Kibarca istek</div></div>
+      <div class="phrase-card"><div class="phrase-en">Do you have this in size M?</div><div class="phrase-tr">Bunun M bedeni var mı?</div><div class="phrase-note">Asking for a size</div></div>
+      <div class="phrase-card"><div class="phrase-en">Can I try this on?</div><div class="phrase-tr">Bunu deneyebilir miyim?</div><div class="phrase-note">Fitting room</div></div>
+      <div class="phrase-card"><div class="phrase-en">How much does this cost?</div><div class="phrase-tr">Bu ne kadar?</div><div class="phrase-note">Asking the price</div></div>
+      <div class="phrase-card"><div class="phrase-en">Do you have this in another colour?</div><div class="phrase-tr">Bunun başka rengi var mı?</div><div class="phrase-note">Colour options</div></div>
+      <div class="phrase-card"><div class="phrase-en">Can I pay by card?</div><div class="phrase-tr">Kartla ödeyebilir miyim?</div><div class="phrase-note">Payment</div></div>
+      <div class="phrase-card"><div class="phrase-en">I'd like to return this, please.</div><div class="phrase-tr">Bunu iade etmek istiyorum.</div><div class="phrase-note">Return / İade</div></div>
+      <div class="phrase-card"><div class="phrase-en">Is there a discount on this?</div><div class="phrase-tr">Bunda indirim var mı?</div><div class="phrase-note">Discount · İndirim</div></div>
+      <div class="phrase-card"><div class="phrase-en">Where is the electronics section?</div><div class="phrase-tr">Elektronik bölümü nerede?</div><div class="phrase-note">Finding a section</div></div>
+      <div class="phrase-card"><div class="phrase-en">Can I get a receipt, please?</div><div class="phrase-tr">Fiş alabilir miyim lütfen?</div><div class="phrase-note">Receipt · Fiş</div></div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- ═══════════════════════ 6. DIALOGUES ═══════════════════════ -->
+  <section class="lesson-section">
+    <div class="section-eyebrow">Section 6</div>
+    <h2 class="section-heading">Dialogues · Diyaloglar</h2>
+
+    <div class="dialogue-card">
+      <div class="dialogue-header"><span>Dialogue 1 — In a clothing store</span><span>Giyim mağazasında</span></div>
+      <div class="dialogue-body">
+        <div class="d-line"><span class="d-tag d-customer">Customer</span><div><div class="d-text">Good morning. I'm looking for a jacket. Do you have any in size L?</div><div class="d-tr">Günaydın. Bir ceket arıyorum. L bedeninde var mı?</div></div></div>
+        <div class="d-line"><span class="d-tag d-assistant">Assistant</span><div><div class="d-text">Good morning! Yes, we have some jackets in size L. Would you like a blue one or a black one?</div><div class="d-tr">Günaydın! Evet, L bedeninde birkaç ceket var. Mavi mi yoksa siyah mı istersiniz?</div></div></div>
+        <div class="d-line"><span class="d-tag d-customer">Customer</span><div><div class="d-text">I prefer the black one. How much does it cost?</div><div class="d-tr">Siyahı tercih ederim. Fiyatı ne kadar?</div></div></div>
+        <div class="d-line"><span class="d-tag d-assistant">Assistant</span><div><div class="d-text">The black jacket is 250 lira. But we have a discount on it this week — it's only 200 lira.</div><div class="d-tr">Siyah ceket 250 lira. Ama bu hafta indirimde, sadece 200 liraya.</div></div></div>
+        <div class="d-line"><span class="d-tag d-customer">Customer</span><div><div class="d-text">That's great. Can I try it on?</div><div class="d-tr">Harika. Deneyebilir miyim?</div></div></div>
+        <div class="d-line"><span class="d-tag d-assistant">Assistant</span><div><div class="d-text">Of course! The fitting room is at the back, on the right.</div><div class="d-tr">Tabii ki! Soyunma kabini arkada, sağda.</div></div></div>
+        <div class="d-line"><span class="d-tag d-customer">Customer</span><div><div class="d-text">It fits perfectly. I'll take it. Can I pay by card?</div><div class="d-tr">Tam oldu. Alıyorum. Kartla ödeyebilir miyim?</div></div></div>
+        <div class="d-line"><span class="d-tag d-assistant">Assistant</span><div><div class="d-text">Yes, of course. Shall I also show you our new shirts? They go well with this jacket.</div><div class="d-tr">Evet, tabii. Yeni gömleklerimizi de göstereyim mi? Bu ceketle çok iyi gider.</div></div></div>
+        <div class="d-line"><span class="d-tag d-customer">Customer</span><div><div class="d-text">Why not! I also need a shirt for work. Do you have any in white, size L?</div><div class="d-tr">Neden olmasın! İş için gömlek de lazım. L bedeninde beyaz var mı?</div></div></div>
+        <div class="d-line"><span class="d-tag d-assistant">Assistant</span><div><div class="d-text">Yes, we have some on the second shelf. Here is your receipt. Thank you and have a nice day!</div><div class="d-tr">Evet, ikinci rafta birkaç tane var. İşte fişiniz. Teşekkürler, iyi günler!</div></div></div>
+      </div>
+    </div>
+
+    <div class="dialogue-card">
+      <div class="dialogue-header"><span>Dialogue 2 — In an electronics store</span><span>Elektronik mağazasında</span></div>
+      <div class="dialogue-body">
+        <div class="d-line"><span class="d-tag d-customer">Customer</span><div><div class="d-text">Excuse me, do you sell laptops here?</div><div class="d-tr">Affedersiniz, burada laptop satıyor musunuz?</div></div></div>
+        <div class="d-line"><span class="d-tag d-assistant">Assistant</span><div><div class="d-text">Yes, we have a lot of laptops. What do you need it for — work or games?</div><div class="d-tr">Evet, çok sayıda laptopumuz var. Ne için lazım — iş mi oyun mu?</div></div></div>
+        <div class="d-line"><span class="d-tag d-customer">Customer</span><div><div class="d-text">It's for work. I need a laptop with a big screen and a long battery life.</div><div class="d-tr">İş için. Geniş ekranlı ve uzun pil ömürlü bir laptop istiyorum.</div></div></div>
+        <div class="d-line"><span class="d-tag d-assistant">Assistant</span><div><div class="d-text">I recommend this model. The screen is 15 inches and the battery lasts about 10 hours.</div><div class="d-tr">Bu modeli tavsiye ederim. Ekranı 15 inç ve pili yaklaşık 10 saat dayanıyor.</div></div></div>
+        <div class="d-line"><span class="d-tag d-customer">Customer</span><div><div class="d-text">Does it come with a charger?</div><div class="d-tr">Şarj aleti ile mi geliyor?</div></div></div>
+        <div class="d-line"><span class="d-tag d-assistant">Assistant</span><div><div class="d-text">Yes, it includes a charger and a cable. We also sell headphones and a laptop bag.</div><div class="d-tr">Evet, şarj aleti ve kablo dahil. Ayrıca kulaklık ve laptop çantası da satıyoruz.</div></div></div>
+        <div class="d-line"><span class="d-tag d-customer">Customer</span><div><div class="d-text">Do you have any headphones on sale?</div><div class="d-tr">İndirimde kulaklık var mı?</div></div></div>
+        <div class="d-line"><span class="d-tag d-assistant">Assistant</span><div><div class="d-text">Yes, we have some wireless headphones at a very good price today. Would you like to see them?</div><div class="d-tr">Evet, bugün çok iyi fiyatlı kablosuz kulaklıklarımız var. Görmek ister misiniz?</div></div></div>
+        <div class="d-line"><span class="d-tag d-customer">Customer</span><div><div class="d-text">Yes, please. Do they work with this laptop?</div><div class="d-tr">Evet, lütfen. Bu laptopla uyumlu mu?</div></div></div>
+        <div class="d-line"><span class="d-tag d-assistant">Assistant</span><div><div class="d-text">Yes, they connect via Bluetooth, so they work with any laptop or phone.</div><div class="d-tr">Evet, Bluetooth ile bağlanıyor, yani her laptop veya telefonla çalışır.</div></div></div>
+        <div class="d-line"><span class="d-tag d-customer">Customer</span><div><div class="d-text">Perfect. I'll take the laptop and the headphones. Here is my card. Can I get a receipt?</div><div class="d-tr">Mükemmel. Laptop ve kulaklığı alıyorum. İşte kartım. Fiş alabilir miyim?</div></div></div>
+        <div class="d-line"><span class="d-tag d-assistant">Assistant</span><div><div class="d-text">Of course! Great choice. Enjoy your new laptop and headphones!</div><div class="d-tr">Tabii ki! Harika seçim. Yeni laptopunuzun ve kulaklığınızın tadını çıkarın!</div></div></div>
+      </div>
+    </div>
+
+    <div class="dialogue-card">
+      <div class="dialogue-header"><span>Dialogue 3 — In a bookstore</span><span>Kitapçıda</span></div>
+      <div class="dialogue-body">
+        <div class="d-line"><span class="d-tag d-customer">Customer</span><div><div class="d-text">Hello, I'm looking for a good English-Turkish dictionary. Do you have any?</div><div class="d-tr">Merhaba, iyi bir İngilizce-Türkçe sözlük arıyorum. Var mı?</div></div></div>
+        <div class="d-line"><span class="d-tag d-assistant">Assistant</span><div><div class="d-text">Yes, we have some on the second shelf. Do you want a pocket dictionary or a large one?</div><div class="d-tr">Evet, ikinci rafta birkaç tane var. Cep sözlüğü mü yoksa büyük boy mu istersiniz?</div></div></div>
+        <div class="d-line"><span class="d-tag d-customer">Customer</span><div><div class="d-text">A large one, please. I study English a lot at work.</div><div class="d-tr">Büyük boy lütfen. İşte çok İngilizce çalışıyorum.</div></div></div>
+        <div class="d-line"><span class="d-tag d-assistant">Assistant</span><div><div class="d-text">Then I recommend this one. It has a lot of clear examples and it is very popular with business professionals.</div><div class="d-tr">O zaman bunu tavsiye ederim. Çok net örnek içeriyor ve iş insanları arasında çok popüler.</div></div></div>
+        <div class="d-line"><span class="d-tag d-customer">Customer</span><div><div class="d-text">Does it also have an online version?</div><div class="d-tr">Online versiyonu da var mı?</div></div></div>
+        <div class="d-line"><span class="d-tag d-assistant">Assistant</span><div><div class="d-text">Yes, it comes with a code. You can use it on your phone or laptop.</div><div class="d-tr">Evet, bir kod ile geliyor. Telefon veya laptopunuzda kullanabilirsiniz.</div></div></div>
+        <div class="d-line"><span class="d-tag d-customer">Customer</span><div><div class="d-text">Great. I'll take it. Do you also have any English novels for A2 level?</div><div class="d-tr">Harika. Alıyorum. A2 seviye İngilizce romanınız da var mı?</div></div></div>
+        <div class="d-line"><span class="d-tag d-assistant">Assistant</span><div><div class="d-text">Yes, we have lots of them! They are great for practising your reading. This one is very popular.</div><div class="d-tr">Evet, çok sayıda var! Okuma pratiği için harika. Bu çok popüler.</div></div></div>
+        <div class="d-line"><span class="d-tag d-customer">Customer</span><div><div class="d-text">Does it come with an audio version too?</div><div class="d-tr">Sesli versiyonu da var mı?</div></div></div>
+        <div class="d-line"><span class="d-tag d-assistant">Assistant</span><div><div class="d-text">Yes! The audio version is free online. I'll write the link on your receipt.</div><div class="d-tr">Evet! Sesli versiyon online ücretsiz. Linki fişinize yazayım.</div></div></div>
+      </div>
+    </div>
+
+    <div class="dialogue-card">
+      <div class="dialogue-header"><span>Dialogue 4 — In a furniture store</span><span>Mobilya mağazasında</span></div>
+      <div class="dialogue-body">
+        <div class="d-line"><span class="d-tag d-customer">Customer</span><div><div class="d-text">Good afternoon. I need some furniture for my new office. Do you sell desks?</div><div class="d-tr">İyi öğleden sonralar. Yeni ofisim için mobilya lazım. Masa satıyor musunuz?</div></div></div>
+        <div class="d-line"><span class="d-tag d-assistant">Assistant</span><div><div class="d-text">Good afternoon! Yes, we have a lot of desks. How big is your office?</div><div class="d-tr">İyi öğleden sonralar! Evet, çok sayıda çalışma masamız var. Ofisiniz ne kadar büyük?</div></div></div>
+        <div class="d-line"><span class="d-tag d-customer">Customer</span><div><div class="d-text">It's quite small — about 15 square metres. I also need a chair and a shelf for my books.</div><div class="d-tr">Oldukça küçük — yaklaşık 15 metrekare. Ayrıca bir sandalye ve kitaplarım için raf lazım.</div></div></div>
+        <div class="d-line"><span class="d-tag d-assistant">Assistant</span><div><div class="d-text">This compact desk is very popular. It doesn't take a lot of space. We also have matching chairs and shelves.</div><div class="d-tr">Bu kompakt masa çok popüler. Fazla yer kaplamıyor. Uyumlu sandalye ve raflarımız da var.</div></div></div>
+        <div class="d-line"><span class="d-tag d-customer">Customer</span><div><div class="d-text">Does the desk come in different colours?</div><div class="d-tr">Masanın farklı renkleri var mı?</div></div></div>
+        <div class="d-line"><span class="d-tag d-assistant">Assistant</span><div><div class="d-text">Yes, we have it in white, grey, and walnut brown. Which colour do you prefer?</div><div class="d-tr">Evet, beyaz, gri ve ceviz kahvesi renk var. Hangi rengi tercih edersiniz?</div></div></div>
+        <div class="d-line"><span class="d-tag d-customer">Customer</span><div><div class="d-text">I'll take the white one. Do you deliver to office buildings?</div><div class="d-tr">Beyazını alıyorum. Ofis binalarına teslimat yapıyor musunuz?</div></div></div>
+        <div class="d-line"><span class="d-tag d-assistant">Assistant</span><div><div class="d-text">Yes, we deliver anywhere in the city. It takes two to three days. Is that OK?</div><div class="d-tr">Evet, şehrin her yerine teslimat yapıyoruz. İki ila üç gün sürer. Uygun mu?</div></div></div>
+        <div class="d-line"><span class="d-tag d-customer">Customer</span><div><div class="d-text">That's fine. I'll take the desk, a chair, and two shelves. Does the price include delivery?</div><div class="d-tr">Tamam. Masa, sandalye ve iki raf alıyorum. Fiyata teslimat dahil mi?</div></div></div>
+        <div class="d-line"><span class="d-tag d-assistant">Assistant</span><div><div class="d-text">Yes, delivery is free for orders over 1,000 lira. Your order qualifies. Here is your receipt!</div><div class="d-tr">Evet, 1.000 lira üzeri siparişlerde teslimat ücretsiz. Siparişiniz bu kapsamda. İşte fişiniz!</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- ═══════════════════════ 7. READING ═══════════════════════ -->
+  <section class="lesson-section">
+    <div class="section-eyebrow">Section 7</div>
+    <h2 class="section-heading">Reading · Okuma</h2>
+    <div class="reading-card">
+      <div class="reading-text-wrap">
+        <div class="reading-label">Read the text carefully · Metni dikkatlice okuyun</div>
+        <p class="reading-text"><strong>A Global Company</strong><br>GlobalMart is a large international company. It sells many different kinds of products around the world. The company ships products across the <strong>Pacific Ocean</strong>, the <strong>Indian Ocean</strong>, and the <strong>Atlantic Ocean</strong>. It has warehouses in more than thirty countries and delivers to customers in over eighty countries. Last year, GlobalMart sent more than five million packages to customers worldwide.</p>
+        <p class="reading-text"><strong>What does GlobalMart sell?</strong><br>GlobalMart sells furniture, electronics, clothes, and books. In the furniture section, there are a lot of tables, chairs, sofas, beds, and shelves. The electronics section is very popular — customers can find phones, laptops, tablets, chargers, cables, and headphones. The clothing section has dresses, jackets, shirts, pants, and shoes in many different sizes and colours. The bookstore sells novels, dictionaries, and magazines from authors all over the world.</p>
+        <p class="reading-text"><strong>The customer service team</strong><br>GlobalMart has a large and friendly customer service team. The team works every day, from Monday to Sunday, from 8 in the morning to 10 at night. Customers can call the team, send an email, or use the online chat on the website. The team speaks English, Turkish, Arabic, and several other languages. If a customer does not like a product, they can return it within thirty days and get a full refund. The company gives a receipt for every purchase.</p>
+        <p class="reading-text"><strong>Shopping at GlobalMart</strong><br>Shopping at GlobalMart is easy and enjoyable. Customers can visit a physical store or shop online from any device. In the store, professional shop assistants always help customers find what they need. A customer can ask: "Do you have this in size M?" or "Does this laptop come with a charger?" The assistants are always friendly and knowledgeable. If there is a discount on a product, the price tag clearly shows the old price and the new, lower price. GlobalMart offers a lot of seasonal discounts, especially in summer and winter.</p>
+        <p class="reading-text"><strong>Payments and delivery</strong><br>Customers can pay with cash or a credit card in store. The company also accepts all major online payment methods. Delivery is fast — most products arrive in two to five working days. Some products qualify for free delivery. If a customer orders furniture, the delivery team can also help with assembly. GlobalMart is one of the most trusted shopping companies in the region, and it has a lot of loyal customers who shop there regularly.</p>
+      </div>
+      <div class="reading-tr-wrap">
+        <div class="reading-label">Turkish translation · Türkçe çeviri</div>
+        <p class="reading-tr">
+          <strong>Küresel Bir Şirket:</strong> GlobalMart, dünya genelinde birçok farklı ürün satan büyük bir uluslararası şirkettir. Pasifik, Hint ve Atlantik Okyanusları boyunca ürün göndermektedir. Otuzdan fazla ülkede depoları olan şirket, seksenin üzerinde ülkedeki müşterilere teslimat yapmaktadır. Geçen yıl dünya genelinde beş milyondan fazla paket gönderilmiştir.<br><br>
+          <strong>Ne satıyor?</strong> Mobilya, elektronik, giyim ve kitap satılmaktadır. Mobilya bölümünde çok sayıda masa, sandalye, kanepe, yatak ve raf bulunur. Elektronik bölümünde telefon, laptop, tablet, şarj aleti, kablo ve kulaklık mevcuttur. Giyim bölümünde farklı beden ve renklerde elbise, ceket, gömlek, pantolon ve ayakkabı satılmaktadır.<br><br>
+          <strong>Müşteri hizmetleri</strong> haftanın yedi günü, sabah 8'den gece 10'a kadar çalışmaktadır. Müşteriler telefon, e-posta veya çevrimiçi sohbet yoluyla ulaşabilir. Ürün beğenilmezse otuz gün içinde tam iade yapılabilmektedir.<br><br>
+          <strong>Alışveriş</strong> mağazadan veya çevrimiçi yapılabilir. Profesyonel görevliler her zaman yardımcıdır. Nakit veya kredi kartıyla ödeme yapılabilir; çevrimiçi ödeme de kabul edilmektedir. Çoğu ürün iki ila beş iş günü içinde teslim edilmektedir. GlobalMart, bölgenin en güvenilir alışveriş şirketlerinden biridir.
+        </p>
+      </div>
+      <div class="reading-qs">
+        <div class="qs-label">Comprehension questions · Anlama soruları</div>
+        <div class="q-row"><span class="q-num">1</span><span>What is the name of the company in the text?</span></div>
+        <div class="q-row"><span class="q-num">2</span><span>How many countries does GlobalMart deliver to?</span></div>
+        <div class="q-row"><span class="q-num">3</span><span>Which three oceans are mentioned in the text?</span></div>
+        <div class="q-row"><span class="q-num">4</span><span>Name four types of products the company sells.</span></div>
+        <div class="q-row"><span class="q-num">5</span><span>What can customers find in the electronics section? Name four items.</span></div>
+        <div class="q-row"><span class="q-num">6</span><span>What are the customer service working hours?</span></div>
+        <div class="q-row"><span class="q-num">7</span><span>Name three ways customers can contact the customer service team.</span></div>
+        <div class="q-row"><span class="q-num">8</span><span>How many days do customers have to return a product?</span></div>
+        <div class="q-row"><span class="q-num">9</span><span>Can customers pay online? What does the text say about payment?</span></div>
+        <div class="q-row"><span class="q-num">10</span><span>How long does delivery usually take?</span></div>
+        <div class="q-row"><span class="q-num">11</span><span>How many packages did GlobalMart send last year?</span></div>
+        <div class="q-row"><span class="q-num">12</span><span>True or False: GlobalMart only sells products in Turkey. Explain your answer.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- ═══════════════════════ 8. FILL-IN EXERCISES ═══════════════════════ -->
+  <section class="lesson-section">
+    <div class="section-eyebrow">Section 8</div>
+    <h2 class="section-heading">Fill-in Exercises · Boşluk Doldurma</h2>
+    <div class="exercise-list">
+      <div class="ex-item"><span class="ex-num">1</span><span>I want <span class="ex-blank"></span> chair for my new desk.</span><span class="ex-hint">a / the</span></div>
+      <div class="ex-item"><span class="ex-num">2</span><span>Do you have <span class="ex-blank"></span> books on engineering?</span><span class="ex-hint">some / any</span></div>
+      <div class="ex-item"><span class="ex-num">3</span><span>She has <span class="ex-blank"></span> of furniture in her new apartment.</span><span class="ex-hint">a lot / lots</span></div>
+      <div class="ex-item"><span class="ex-num">4</span><span><span class="ex-blank"></span> you sell laptops here?</span><span class="ex-hint">Do / Does</span></div>
+      <div class="ex-item"><span class="ex-num">5</span><span><span class="ex-blank"></span> he work in the electronics section?</span><span class="ex-hint">Do / Does</span></div>
+      <div class="ex-item"><span class="ex-num">6</span><span>I don't have <span class="ex-blank"></span> clean clothes — I need to go shopping.</span><span class="ex-hint">some / any</span></div>
+      <div class="ex-item"><span class="ex-num">7</span><span>We ship products across <span class="ex-blank"></span> Pacific Ocean.</span><span class="ex-hint">a / the</span></div>
+      <div class="ex-item"><span class="ex-num">8</span><span>I don't have <span class="ex-blank"></span> chargers at home. I need to buy one.</span><span class="ex-hint">some / any</span></div>
+      <div class="ex-item"><span class="ex-num">9</span><span>Can I have <span class="ex-blank"></span> umbrella? It's raining outside.</span><span class="ex-hint">a / an</span></div>
+      <div class="ex-item"><span class="ex-num">10</span><span><span class="ex-blank"></span> they deliver to office buildings?</span><span class="ex-hint">Do / Does</span></div>
+      <div class="ex-item"><span class="ex-num">11</span><span>The store has <span class="ex-blank"></span> of products on sale this week.</span><span class="ex-hint">a lot / lots</span></div>
+      <div class="ex-item"><span class="ex-num">12</span><span><span class="ex-blank"></span> this laptop come with a charger?</span><span class="ex-hint">Do / Does</span></div>
+      <div class="ex-item"><span class="ex-num">13</span><span>I bought <span class="ex-blank"></span> sofa yesterday. <span class="ex-blank"></span> sofa is very comfortable.</span><span class="ex-hint">a / the</span></div>
+      <div class="ex-item"><span class="ex-num">14</span><span>Would you like <span class="ex-blank"></span> help with your shopping?</span><span class="ex-hint">some / any</span></div>
+      <div class="ex-item"><span class="ex-num">15</span><span>She <span class="ex-blank"></span> sell clothes — she works in the electronics section.</span><span class="ex-hint">don't / doesn't</span></div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- ═══════════════════════ 9. SPEAKING DRILLS ═══════════════════════ -->
+  <section class="lesson-section">
+    <div class="section-eyebrow">Section 9</div>
+    <h2 class="section-heading">Speaking Drills · Konuşma Pratikleri</h2>
+    <div class="two-col">
+      <div class="mini-card">
+        <div class="mini-head">Repeat &amp; Replace</div>
+        <div class="mini-body">
+          <div class="mini-row">I want a <strong>shirt</strong> <span class="arrow">→</span> I want a <strong>jacket</strong></div>
+          <div class="mini-row">I want a <strong>phone</strong> <span class="arrow">→</span> I want a <strong>laptop</strong></div>
+          <div class="mini-row">I want a <strong>book</strong> <span class="arrow">→</span> I want a <strong>dictionary</strong></div>
+          <div class="mini-row">I want a <strong>table</strong> <span class="arrow">→</span> I want a <strong>desk</strong></div>
+          <div class="mini-row">I want <strong>some shoes</strong> <span class="arrow">→</span> I want <strong>some headphones</strong></div>
+        </div>
+      </div>
+      <div class="mini-card">
+        <div class="mini-head">Practice Questions</div>
+        <div class="mini-body">
+          <div class="mini-row">Do you have this in size M?</div>
+          <div class="mini-row">Does she work in this store?</div>
+          <div class="mini-row">Do they sell any chargers?</div>
+          <div class="mini-row">Does this come with a receipt?</div>
+          <div class="mini-row">Do you have any discounts today?</div>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:12px;">
+      <div class="mini-card">
+        <div class="mini-head">Role Play Scenarios</div>
+        <div class="mini-body">
+          <div class="mini-row"><strong>Scenario A:</strong> You want to buy a laptop. Ask about the screen size, battery life, and price.</div>
+          <div class="mini-row"><strong>Scenario B:</strong> You are looking for a shirt in size L. Ask if they have it in blue. Ask to try it on.</div>
+          <div class="mini-row"><strong>Scenario C:</strong> You want to buy a dictionary for your English studies at work. Compare two options.</div>
+          <div class="mini-row"><strong>Scenario D:</strong> You want to return a jacket you bought last week. Explain the problem politely and ask for an exchange.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- ═══════════════════════ 10. WORD ORDER ═══════════════════════ -->
+  <section class="lesson-section">
+    <div class="section-eyebrow">Section 10 — Interactive</div>
+    <h2 class="section-heading">Word Order · Kelime Sırası (×20)</h2>
+    <p style="font-size:14px;color:var(--text-sec);margin-bottom:1.2rem;">Click the words in the correct order to build the sentence. Click a placed word to remove it. Then press Check.</p>
+    <div class="wo-list" id="wo-list"></div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- ═══════════════════════ 11. QUIZ ═══════════════════════ -->
+  <section class="lesson-section">
+    <div class="section-eyebrow">Section 11 — Interactive</div>
+    <h2 class="section-heading">Quiz · Test (×20)</h2>
+    <p style="font-size:14px;color:var(--text-sec);margin-bottom:1.2rem;">Choose the correct answer. Answer all 20 questions to see your score.</p>
+    <div class="quiz-list" id="quiz-list"></div>
+    <div style="margin-top:1.5rem;" id="quiz-score-wrap"></div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- ═══════════════════════ 12. SPEAKING CHALLENGE ═══════════════════════ -->
+  <section class="lesson-section">
+    <div class="section-eyebrow">Section 12</div>
+    <h2 class="section-heading">Speaking Challenge · Konuşma Görevi</h2>
+    <div class="challenge-card">
+      <div class="challenge-icon">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 15a3 3 0 0 0 3-3V6a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3zm5-3a5 5 0 0 1-10 0H5a7 7 0 0 0 6 6.93V21h2v-2.07A7 7 0 0 0 19 12h-2z"/></svg>
+      </div>
+      <div>
+        <div class="challenge-title">2–3 minute speaking task</div>
+        <div class="challenge-text">
+          Imagine you work at TANAP and you need to buy equipment for the office. Talk for 2–3 minutes about what you need to buy, where you would buy it, and how much it costs. Use all grammar from this lesson in your speech.<br><br>
+          <strong>Checklist — use at least one of each:</strong><br>
+          ✔ "Can I have…?" &nbsp;&nbsp; ✔ "Do you have any…?" &nbsp;&nbsp; ✔ "Does it come with…?" &nbsp;&nbsp; ✔ "a lot of" &nbsp;&nbsp; ✔ "the" for something specific &nbsp;&nbsp; ✔ "doesn't" in a negative sentence
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="page-footer">
+    Prepared for Mehmet Kaan Yılmaz &nbsp;·&nbsp; TANAP &nbsp;·&nbsp; A2 Elementary English &nbsp;·&nbsp; Shopping &amp; Asking for Things
+  </div>
+
+</div>
+
+<script>
+/* ════════════════════════════════════
+   WORD ORDER
+════════════════════════════════════ */
+const woData = [
+  { words:["I","want","a","jacket","in","size","L"], answer:"I want a jacket in size L" },
+  { words:["Do","you","have","any","laptops","here"], answer:"Do you have any laptops here" },
+  { words:["She","has","a","lot","of","books"], answer:"She has a lot of books" },
+  { words:["Can","I","try","this","on"], answer:"Can I try this on" },
+  { words:["Does","he","work","in","the","electronics","section"], answer:"Does he work in the electronics section" },
+  { words:["We","don't","have","any","chargers"], answer:"We don't have any chargers" },
+  { words:["The","shirt","is","on","the","second","shelf"], answer:"The shirt is on the second shelf" },
+  { words:["Do","they","deliver","to","office","buildings"], answer:"Do they deliver to office buildings" },
+  { words:["I","need","some","furniture","for","my","office"], answer:"I need some furniture for my office" },
+  { words:["Does","this","come","with","a","charger"], answer:"Does this come with a charger" },
+  { words:["Can","I","pay","by","credit","card"], answer:"Can I pay by credit card" },
+  { words:["We","sell","a","lot","of","products","around","the","world"], answer:"We sell a lot of products around the world" },
+  { words:["Do","you","have","this","in","another","colour"], answer:"Do you have this in another colour" },
+  { words:["She","doesn't","sell","clothes"], answer:"She doesn't sell clothes" },
+  { words:["The","customer","service","team","works","every","day"], answer:"The customer service team works every day" },
+  { words:["I","would","like","an","English-Turkish","dictionary"], answer:"I would like an English-Turkish dictionary" },
+  { words:["Does","the","store","have","any","discounts","today"], answer:"Does the store have any discounts today" },
+  { words:["They","ship","across","the","Pacific","Ocean"], answer:"They ship across the Pacific Ocean" },
+  { words:["I","don't","have","any","money","today"], answer:"I don't have any money today" },
+  { words:["Can","I","have","a","receipt","please"], answer:"Can I have a receipt please" }
+];
+
+function shuffle(arr){ const a=[...arr]; for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]; } return a; }
+
+const woStates = woData.map(q=>({ shuffled:shuffle(q.words), placed:[], answer:q.answer, checked:false }));
+
+function renderWO(){
+  const list=document.getElementById('wo-list'); list.innerHTML='';
+  woStates.forEach((state,idx)=>{
+    const item=document.createElement('div'); item.className='wo-item';
+    const numRow=document.createElement('div'); numRow.className='wo-num-row';
+    numRow.innerHTML=`<span class="wo-num">${idx+1}</span><span class="wo-instruction">Put the words in the correct order · Kelimeleri doğru sıraya koyun</span>`;
+    item.appendChild(numRow);
+    const wordsDiv=document.createElement('div'); wordsDiv.className='wo-words';
+    state.shuffled.forEach((w,wi)=>{
+      const btn=document.createElement('span'); btn.className='wo-word'+(state.placed.includes(wi)?' used':'');
+      btn.textContent=w;
+      if(!state.placed.includes(wi)&&!state.checked){ btn.onclick=()=>{ state.placed.push(wi); renderWO(); }; }
+      wordsDiv.appendChild(btn);
+    });
+    item.appendChild(wordsDiv);
+    const answerDiv=document.createElement('div'); answerDiv.className='wo-answer'+(state.placed.length>0?' has-content':'');
+    if(state.placed.length===0){ answerDiv.textContent='Click words above to build the sentence…'; }
+    else{ state.placed.forEach((wi,pi)=>{ const pw=document.createElement('span'); pw.className='wo-placed'; pw.textContent=state.shuffled[wi]; if(!state.checked){ pw.onclick=()=>{ state.placed.splice(pi,1); renderWO(); }; } answerDiv.appendChild(pw); }); }
+    item.appendChild(answerDiv);
+    const checkRow=document.createElement('div'); checkRow.className='wo-check';
+    if(!state.checked){
+      const cb=document.createElement('button'); cb.className='wo-btn'; cb.textContent='Check ✓'; cb.onclick=()=>{ state.checked=true; renderWO(); }; checkRow.appendChild(cb);
+      const rb=document.createElement('button'); rb.className='wo-btn'; rb.textContent='Reset'; rb.onclick=()=>{ state.placed=[]; state.checked=false; renderWO(); }; checkRow.appendChild(rb);
+    } else {
+      const built=state.placed.map(wi=>state.shuffled[wi]).join(' ');
+      const ok=built.replace(/[?!.,]/g,'').trim().toLowerCase()===state.answer.replace(/[?!.,]/g,'').trim().toLowerCase();
+      const fb=document.createElement('span'); fb.className='wo-feedback '+(ok?'correct':'wrong');
+      fb.textContent=ok?'Correct!':'Answer: '+state.answer; checkRow.appendChild(fb);
+      const rb=document.createElement('button'); rb.className='wo-btn'; rb.textContent='Try again'; rb.onclick=()=>{ state.placed=[]; state.checked=false; renderWO(); }; checkRow.appendChild(rb);
+    }
+    item.appendChild(checkRow); list.appendChild(item);
+  });
+}
+
+/* ════════════════════════════════════
+   QUIZ
+════════════════════════════════════ */
+const quizData = [
+  { q:"I want ___ laptop for work.", choices:["a","an","the"], correct:0 },
+  { q:"Do you have ___ jackets in size L?", choices:["some","any","a lot"], correct:1 },
+  { q:"___ he sell furniture?", choices:["Do","Does","Is"], correct:1 },
+  { q:"We ship across ___ Indian Ocean.", choices:["a","an","the"], correct:2 },
+  { q:"I have ___ books — the shelf is completely full.", choices:["some","any","a lot of"], correct:2 },
+  { q:"She ___ work here. She works at a different store.", choices:["don't","doesn't","isn't"], correct:1 },
+  { q:"Can I have ___ umbrella? It's raining outside.", choices:["a","an","the"], correct:1 },
+  { q:"I don't have ___ money with me today.", choices:["some","any","a lot"], correct:1 },
+  { q:"___ they deliver to office buildings?", choices:["Do","Does","Is"], correct:0 },
+  { q:"Would you like ___ help with your shopping?", choices:["some","any","lots"], correct:0 },
+  { q:"I saw ___ jacket I liked. ___ jacket was blue.", choices:["a / The","the / A","a / A"], correct:0 },
+  { q:"___ this laptop come with a charger?", choices:["Do","Does","Is"], correct:1 },
+  { q:"She has ___ of furniture in her new flat.", choices:["a lot","lots","both a lot and lots"], correct:2 },
+  { q:"I ___ have any chargers at home. I need to buy one.", choices:["don't","doesn't","am not"], correct:0 },
+  { q:"Do you sell ___ dictionaries at A2 level?", choices:["some","any","both some and any"], correct:2 },
+  { q:"This is ___ best laptop in the whole store.", choices:["a","an","the"], correct:2 },
+  { q:"___ you work in the clothing section?", choices:["Do","Does","Are"], correct:0 },
+  { q:"We don't have ___ sofas left — they are all sold.", choices:["some","any","a lot of"], correct:1 },
+  { q:"The team works every day, from Monday ___ Sunday.", choices:["to","until","both to and until"], correct:2 },
+  { q:"Customers can return a product within ___ thirty days.", choices:["a","the","Ø (no article)"], correct:2 }
+];
+
+const quizAnswers = new Array(quizData.length).fill(null);
+
+function renderQuiz(){
+  const list=document.getElementById('quiz-list'); list.innerHTML='';
+  quizData.forEach((q,idx)=>{
+    const card=document.createElement('div'); card.className='quiz-card';
+    const qRow=document.createElement('div'); qRow.className='quiz-q-row';
+    qRow.innerHTML=`<span class="quiz-num">${idx+1}</span><div class="quiz-q">${q.q}</div>`;
+    card.appendChild(qRow);
+    const choices=document.createElement('div'); choices.className='quiz-choices';
+    q.choices.forEach((c,ci)=>{
+      const btn=document.createElement('button'); btn.className='choice-btn'; btn.textContent=c;
+      if(quizAnswers[idx]!==null){ btn.disabled=true; if(ci===q.correct) btn.classList.add('correct'); else if(ci===quizAnswers[idx]) btn.classList.add('wrong'); }
+      else { btn.onclick=()=>{ quizAnswers[idx]=ci; renderQuiz(); checkQuizComplete(); }; }
+      choices.appendChild(btn);
+    });
+    card.appendChild(choices); list.appendChild(card);
+  });
+}
+
+function checkQuizComplete(){
+  if(!quizAnswers.every(a=>a!==null)) return;
+  const score=quizAnswers.filter((a,i)=>a===quizData[i].correct).length;
+  const msg = score>=18 ? 'Excellent work, Mehmet Kaan! You have mastered this lesson.' : score>=14 ? 'Good job! Review the grammar tables to improve further.' : 'Keep practising — re-read sections 2, 3 and 4 and try again.';
+  document.getElementById('quiz-score-wrap').innerHTML=`<div class="score-box"><div><div style="font-size:12px;font-weight:500;text-transform:uppercase;letter-spacing:.08em;color:var(--text-ter);margin-bottom:4px;">Your score · Puanınız</div><div class="score-val">${score} / ${quizData.length}</div></div><div style="font-size:14px;color:var(--text-sec);line-height:1.6;">${msg}</div></div>`;
+}
+
+renderWO();
+renderQuiz();
+</script>
+</body>
+</html>
